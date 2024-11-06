@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField inputText;
-    [SerializeField] private Button okButton;
+    [SerializeField] private Button okButton, exportButton;
     private ItemList itemList;
     [SerializeField] private Transform itemParent;
     [SerializeField] private Transform inputField;
@@ -25,13 +25,13 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         okButton.onClick.AddListener(OnOkButtonClicked);
-        ItemList.OnListChange += AdjustContentSize;
+        exportButton.onClick.AddListener(OnShareButtonClicked);
     }
 
     private void OnDisable()
     {
         okButton.onClick.RemoveListener(OnOkButtonClicked);
-        ItemList.OnListChange -= AdjustContentSize;
+        exportButton.onClick.RemoveListener(OnShareButtonClicked);
     }
 
     private void Start()
@@ -48,20 +48,16 @@ public class UIManager : MonoBehaviour
         inputText.text = string.Empty;
     }
 
-    private void AdjustContentSize()
+    public void OnShareButtonClicked()
     {
-        Vector3 viewportPosition;
-        contentTransform.offsetMin = new Vector2(0f, -400f);
-
-        for (int i = 0; i < contentTransform.childCount; i++)
+        string shareText = "";
+        ItemController[] itemconts = FindObjectsOfType<ItemController>();
+        foreach(ItemController item in itemconts)
         {
-            RectTransform child = contentTransform.GetChild(i).GetComponent<RectTransform>();
-            viewportPosition = Camera.main.WorldToViewportPoint(child.position);
-
-            if (viewportPosition.y < 0)
-            {
-                contentTransform.offsetMin -= new Vector2(0f, 250f);
-            }
+            if(item.itemData.toggle)
+                shareText += item.itemData.name + " " + item.itemData.quantity + "\n";
         }
+
+        new NativeShare().AddTarget("com.whatsapp").SetText(shareText).Share();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public struct ItemData
     public string quantity;
 }
 
-public class ItemController : MonoBehaviour, IMovable
+public class ItemController : MonoBehaviour
 {
     private float distancebetweenItems = 250f;
     public enum ItemState { Moving, Idle }
@@ -19,7 +20,7 @@ public class ItemController : MonoBehaviour, IMovable
     private ItemList itemList;
     private string itemName;
     private int distanceMultiplier = 0;
-    private ItemData itemData;
+    public ItemData itemData;
     private Button removeButton;
 
     private void Awake()
@@ -82,31 +83,33 @@ public class ItemController : MonoBehaviour, IMovable
 
     private void HandleIndexChange()
     {
-        int index = -1;
-        for(int i = 0; i < itemList.GetList().Count; i++)
-        {
-            if (itemList.GetList()[i] == itemName)
-            {
-                index = i;
-            }
-        }
+        //int index = -1;
+        //for (int i = 0; i < itemList.GetList().Count; i++)
+        //{
+        //    if (itemList.GetList()[i] == itemName)
+        //    {
+        //        index = i;
+        //    }
+        //}
         
-        if (index == -1)
-            return;
+        //if (index == -1)
+        //    return;
 
-        if (distanceMultiplier == itemList.GetList().Count - index)
-            return;
-        else
-        {
-            distanceMultiplier = itemList.GetList().Count - index;
-            Move();
-        }
+        //if (distanceMultiplier == itemList.GetList().Count - index)
+        //    return;
+        //else
+        //{
+        //    distanceMultiplier = itemList.GetList().Count - index;
+        //    Move();
+        //}
     }
 
     public void Move()
     {
         startingPos = transform.position.y;
         targetPos = anchorPos - distanceMultiplier * distancebetweenItems;
+        if (distanceMultiplier == 1)
+            Debug.Log("startPos: " + startingPos + " targetPos: " + targetPos);
         itemState = ItemState.Moving;
     }
 }
