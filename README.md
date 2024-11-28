@@ -4,5 +4,6 @@
 - A text will be exported to Whatsapp directly. Select your desired target there.
 
 ## Screenshots
-![Alt Text](Assets/Textures/Screenshots/1.jpeg)
-![Alt Text](Assets/Textures/Screenshots/2.jpeg)
+<img src="Assets/Textures/Screenshots/1.jpeg" alt="Alt Text" width="185" height="400">
+<img src="Assets/Textures/Screenshots/2.jpeg" alt="Alt Text" width="185" height="400">
+
