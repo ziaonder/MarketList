@@ -4,5 +4,5 @@
 - A text will be exported to Whatsapp directly. Select your desired target there.
 
 ## Screenshots
-![Alt Text](Assets/Textures/Screenshots/WhatsApp Image 2024-11-29 at 1.11.32 AM(1).jpeg)
-![Alt Text](Assets/Textures/Screenshots/WhatsApp Image 2024-11-29 at 1.11.32 AM.jpeg)
+![Alt Text](Assets/Textures/Screenshots/1.jpeg)
+![Alt Text](Assets/Textures/Screenshots/2.jpeg)
